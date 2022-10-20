@@ -5,37 +5,83 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
 import NavHead from '../components/header';
-import {Image,Text,View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
+const HomeStack = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Login"
+                component={LoginScreen}
+                options={
+                    {headerShown: false}
+                }/>
+            <Stack.Screen name="HomeScreen"
+                component={HomeScreen}
+                options={
+
+                    NavHead('Starbucks')
+                }/>
+        </Stack.Navigator>
+    );
+}
 
 const AppNavigationContainer = () => {
     return (
         <NavigationContainer>
 
-            <Tab.Navigator initialRouteName="Splash">
-                <Tab.Screen name="Login"
-                    component={LoginScreen}
+            <Tab.Navigator initialRouteName="Splash"
+                screenOptions={
+                    {tabBarShowLabel: false}
+            }>
+                <Tab.Screen name="homess"
+                    component={HomeStack}
                     options={
-                      
-                        NavHead('Starbucks', 'favorite')
-                           
+                        {
+                            headerShown: false,
+                            tabBarIcon: () => (
+                                <Image source={
+                                    require(`../assets/icons/u_star.png`)
+                                }/>
+                            )
+                        }
                     }/>
                 <Tab.Screen name="Home"
                     component={HomeScreen}
                     options={
-                      NavHead('3242345', 'cup')
-                        
+                        {
+                            headerShown: false,
+                            tabBarIcon: () => (
+                                <Image source={
+                                    require(`../assets/icons/u_cup.png`)
+                                }/>
+                            )
+                        }
                     }/>
-                    <Tab.Screen name="Homec"
+                <Tab.Screen name="Homec"
                     component={HomeScreen}
                     options={
-                      NavHead('3242345', 'cc')
+                        {
+                            headerShown: false,
+                            tabBarIcon: () => (
+                                <Image source={
+                                    require(`../assets/icons/u_credit-card.png`)
+                                }/>
+                            )
+                        }
                     }/>
-                    <Tab.Screen name="Homes"
+                <Tab.Screen name="Homes"
                     component={HomeScreen}
                     options={
-                      NavHead('3242345', 'u_location-point')
+                        {
+                            headerShown: false,
+                            tabBarIcon: () => (
+                                <Image source={
+                                    require(`../assets/icons/u_location-point.png`)
+                                }/>
+                            )
+                        }
                     }/>
             </Tab.Navigator>
         </NavigationContainer>
