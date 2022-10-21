@@ -63,9 +63,7 @@ const LoginScreen = ({navigation}) => {
                     }>
 
 
-                        <ScrollView style={
-                            {}
-                        }>
+                        <ScrollView>
                             <Image source={
                                     require('../../assets/sb-green-text-logo.png')
                                 }

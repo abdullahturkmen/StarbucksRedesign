@@ -4,88 +4,65 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
+import OrderScreen from '../screens/OrderScreen';
 import NavHead from '../components/header';
-import {Image, Text, View} from 'react-native';
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const HomeStack = () => {
+const TabNavigate = () => {
     return (
-        <Stack.Navigator>
-            <Stack.Screen name="Login"
-                component={LoginScreen}
-                options={
-                    {headerShown: false}
-                }/>
-            <Stack.Screen name="HomeScreen"
+        <Tab.Navigator screenOptions={
+            {tabBarShowLabel: false}
+        }>
+            <Tab.Screen name="homess"
                 component={HomeScreen}
                 options={
-
-                    NavHead('Starbucks')
+                    NavHead('Starbucks', 'favorite')
                 }/>
-        </Stack.Navigator>
+            <Tab.Screen name="Order"
+                component={OrderScreen}
+                options={
+                    NavHead('Sipariş Oluştur', 'cup')
+                }/>
+            <Tab.Screen name="Homec"
+                component={HomeScreen}
+                options={
+                    NavHead('Sipariş Oluştur2', 'cc')
+                }/>
+            <Tab.Screen name="Homes"
+                component={LoginScreen}
+                options={
+                    NavHead('Sipariş Oluştur3', 'location')
+                }/>
+        </Tab.Navigator>
     );
 }
 
 const AppNavigationContainer = () => {
     return (
         <NavigationContainer>
+            <Stack.Navigator initialRouteName="Splash">
+                <Stack.Screen name="Login"
+                    component={LoginScreen}
+                    options={
+                        {headerShown: false}
+                    }/>
+                <Stack.Screen name="Home"
+                    component={TabNavigate}
+                    options={
+                        {headerShown: false}
+                    }/>
+                <Stack.Screen name="OrderScreen"
+                    component={OrderScreen}
+                    options={
+                        NavHead('Sipariş Oluştur')
+                    }/>
+            </Stack.Navigator>
 
-            <Tab.Navigator initialRouteName="Splash"
-                screenOptions={
-                    {tabBarShowLabel: false}
-            }>
-                <Tab.Screen name="homess"
-                    component={HomeStack}
-                    options={
-                        {
-                            headerShown: false,
-                            tabBarIcon: () => (
-                                <Image source={
-                                    require(`../assets/icons/u_star.png`)
-                                }/>
-                            )
-                        }
-                    }/>
-                <Tab.Screen name="Home"
-                    component={HomeScreen}
-                    options={
-                        {
-                            headerShown: false,
-                            tabBarIcon: () => (
-                                <Image source={
-                                    require(`../assets/icons/u_cup.png`)
-                                }/>
-                            )
-                        }
-                    }/>
-                <Tab.Screen name="Homec"
-                    component={HomeScreen}
-                    options={
-                        {
-                            headerShown: false,
-                            tabBarIcon: () => (
-                                <Image source={
-                                    require(`../assets/icons/u_credit-card.png`)
-                                }/>
-                            )
-                        }
-                    }/>
-                <Tab.Screen name="Homes"
-                    component={HomeScreen}
-                    options={
-                        {
-                            headerShown: false,
-                            tabBarIcon: () => (
-                                <Image source={
-                                    require(`../assets/icons/u_location-point.png`)
-                                }/>
-                            )
-                        }
-                    }/>
-            </Tab.Navigator>
         </NavigationContainer>
     );
 };
+
 
 export default AppNavigationContainer;

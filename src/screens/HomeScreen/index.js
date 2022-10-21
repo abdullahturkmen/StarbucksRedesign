@@ -14,38 +14,13 @@ import {
     useColorScheme,
     View,
     Button,
-    Header
+    ImageBackground,
+    ScrollView
 } from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-import styles from './style';
-
-const Section = ({children, title}) => {
-    const isDarkMode = useColorScheme() === 'dark';
-    return (
-        <View style={
-            styles.sectionContainer
-        }>
-            <Text style={
-                [
-                    styles.sectionTitle, {
-                        color: isDarkMode ? Colors.white : Colors.black
-                    },
-                ]
-            }>
-                {title} </Text>
-            <Text style={
-                [
-                    styles.sectionDescription, {
-                        color: isDarkMode ? Colors.light : Colors.dark
-                    },
-                ]
-            }>
-                {children} </Text>
-        </View>
-    );
-};
+import HomeScreenStyles from './style';
 
 const HomeScreen = ({navigation}) => {
     const isDarkMode = useColorScheme() === 'dark';
@@ -61,29 +36,61 @@ const HomeScreen = ({navigation}) => {
                 }
                 backgroundColor="#fff"/>
 
+            <ScrollView>
+                <View style={
+                    {backgroundColor: "#F7F8FA"}
+                }>
 
-            <View style={
-                {
-                    backgroundColor: "#F7F8FA",
-                }
-            }>
-                <Text>This is 's profile</Text>
-                <Section title="HomeScreen">
-                    Edit
+                    <View style={
+                        {
+                            margin: 20,
+                            borderRadius: 20,
+                            backgroundColor: '#4AA366',
+                            overflow: 'hidden'
+                        }
+                    }>
+                        <ImageBackground source={
+                                require('../../assets/total-money-bg.png')
+                            }
+
+                            style={
+                                {
+                                    resizeMode: 'cover',
+                                    justifyContent: 'center'
+                                }
+                        }>
+                            <View style={
+                                {padding: 20}
+                            }>
+
+                                <Text style={
+                                    {
+                                        color: 'white',
+                                        marginTop: 40
+
+                                    }
+                                }>Toplam Param</Text>
+                                <Text style={
+                                    {
+                                        color: 'white',
+                                        fontSize: 30,
+                                        fontWeight: 'bold'
+
+                                    }
+                                }>55,35 TL</Text>
+
+                            </View>
+                        </ImageBackground>
+                    </View>
+
+
                     <Text style={
-                        styles.highlight
-                    }>cvbcvb.js</Text>
-                    to change this
-                                screen and then come back to see your edits.
-                </Section>
+                        {padding: 20}
+                    }>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
 
-                <Button title="Go to LoginScreen"
-                    onPress={
-                        () => navigation.navigate('Login')
-                    }/>
 
-            </View>
-
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 };

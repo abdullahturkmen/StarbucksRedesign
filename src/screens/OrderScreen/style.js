@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-const HomeScreenStyles = StyleSheet.create({
+const OrderScreenStyles = StyleSheet.create({
     sectionContainer: {
         marginTop: 32,
         paddingHorizontal: 24,
@@ -23,4 +23,4 @@ const HomeScreenStyles = StyleSheet.create({
 });
 
 
-export default HomeScreenStyles;
+export default OrderScreenStyles;
