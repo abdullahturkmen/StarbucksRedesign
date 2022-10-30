@@ -15,7 +15,8 @@ import {
     View,
     Button,
     Image,
-    ScrollView
+    ScrollView,
+    Pressable 
 } from 'react-native';
 
 import { getMenuData } from './menuData';
@@ -25,18 +26,18 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import OrderScreenStyles from './style';
 
 const menuDataItem = (details) => {
-    return (<View style={{display: 'flex',flexDirection: 'row',marginBottom: 10}}>
-    <Image style={{width: 80, height: 80, borderRadius: 100, marginRight: 20}} source={{uri: details['image']}} />
+    return (<View key={details['id']} style={{display: 'flex',flexDirection: 'row',marginBottom: 10}}>
+    <Image style={{width: 80, height: 80, borderRadius: 100, marginRight: 20}} source={{uri: details['imageLocation']}} />
     <View style={{flex: 1}}>
-    <Text style={{color: '#2E2D38', fontSize: 20, fontWeight: 'bold'}}>{details['title']}</Text>
+    <Text style={{color: '#2E2D38', fontSize: 20, fontWeight: 'bold'}}>{details.name["tr_TR"]}</Text>
     <Text style={{color: '#2E2D38'}}>20 TL</Text>
-    <View style={{display: 'flex', justifyContent: 'flex-end'}}><Button style={{width: 'max-content'}} title='Ekle'></Button></View>
+    <View style={{display: 'flex', alignSelf: 'flex-end'}}><Pressable style={OrderScreenStyles.itemAddCartBtn} title='Ekle'><Text style={{color: '#FFF'}}>Ekle</Text></Pressable></View>
     </View>
 </View>)
 }
 
 const OrderScreen = ({navigation}) => {
-    const [scrollMenu, setScrollMenu] = useState('all');
+    const [scrollMenuSelect, setScrollMenuSelect] = useState('all');
     const [dataState, setDataState] = useState([]);
     const isDarkMode = useColorScheme() === 'dark';
 
@@ -48,6 +49,7 @@ const OrderScreen = ({navigation}) => {
         getMenuData().then(setDataState);
       }, []);
 
+     
     return (
         <SafeAreaView style={backgroundStyle}>
             <StatusBar barStyle={
@@ -64,22 +66,24 @@ const OrderScreen = ({navigation}) => {
                 <View style={
                     {
                         paddingVertical: 20,
-                        overflow: 'hidden'
+                        overflow: 'hidden',
+                        backgroundColor: '#FFF',
+                        marginTop: 10
                     }
                 }>
-                    <Text>{scrollMenu}</Text>
+                    <Text style={{paddingLeft: 10, paddingBottom: 20, fontSize: 16, fontWeight: 'bold', color: '#000'}}>Menu</Text>
                     <ScrollView horizontal={true}>
 
-                        <Button title="all"
+                        <Pressable style={OrderScreenStyles.menuCategoryBtn} title="all"
                             onPress={
-                                () => setScrollMenu('all')
-                        }></Button>
-                        {dataState.map(e => (
+                                () => setScrollMenuSelect('all')
+                        }><Text>Hepsi</Text></Pressable >
+                        { dataState && dataState['categories'].map((e, index) => (
                            
-                            <Button title={e.categoryName}
+                            <Pressable key={index} style={OrderScreenStyles.menuCategoryBtn} title={e.name['tr_TR']}
                             onPress={
-                                () => setScrollMenu(e.categoryName)
-                        }></Button>
+                                () => setScrollMenuSelect(e['parent'])
+                        }><Text>{e.name['tr_TR']}</Text></Pressable>
                         ))}
                         
                         
@@ -89,22 +93,23 @@ const OrderScreen = ({navigation}) => {
 
                 </View>
 
-                <View>
-                    <ScrollView style={{padding: 10}}>
-                        { scrollMenu === "all" ?
-                             dataState.map(e => (
-                                e.items.map(x => (         
-                                    menuDataItem(x)
-                                ))
+                <View style={{backgroundColor: '#FFF'}}>
+                   
+                     <ScrollView style={{padding: 10}}>
+                        { dataState && scrollMenuSelect === "all" ?
+                             dataState['products'].map(e => (
+                                        
+                                    menuDataItem(e)
+                                
                             ))
                         : 
-                             dataState.filter(e => e.categoryName == scrollMenu).map(e => (
-                                e.items.map(x => (
-                                    menuDataItem(x)
-                                ))
+                        dataState['products'].filter(e => e.categories.includes(scrollMenuSelect)).map(e => (
+                               
+                                    menuDataItem(e)
+                              
                             ))
                         }
-                    </ScrollView>
+                    </ScrollView> 
                 </View>
 
 

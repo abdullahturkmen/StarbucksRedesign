@@ -1,24 +1,24 @@
 import {StyleSheet} from 'react-native';
 const OrderScreenStyles = StyleSheet.create({
-    sectionContainer: {
-        marginTop: 32,
-        paddingHorizontal: 24,
-        color: 'red'
+    menuCategoryBtn: {
+        borderWidth: 1,
+        borderColor: '#DFE4EC',
+        marginHorizontal: 5,
+        paddingVertical: 2,
+        paddingHorizontal: 10,
+        borderRadius:4,
+        color: '#2E2D38',
+        fontSize: 14,
     },
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: '600',
-        color: 'red'
-    },
-    sectionDescription: {
-        marginTop: 8,
-        fontSize: 18,
-        fontWeight: '400',
-        color: 'red'
-    },
-    highlight: {
-        fontWeight: '700',
-        color: 'green'
+    itemAddCartBtn: {
+        backgroundColor: '#4AA366',
+        marginHorizontal: 5,
+        paddingVertical: 2,
+        paddingHorizontal: 10,
+        borderRadius:4,
+        color: '#FFFFFF',
+        fontSize: 14,
+        alignSelf: 'flex-end'
     }
 });
 
