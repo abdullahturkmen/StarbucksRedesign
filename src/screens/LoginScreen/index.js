@@ -125,7 +125,7 @@ const LoginScreen = ({navigation}) => {
 
                                 }
                                 onPress={
-                                    () => navigation.navigate('Home', {name: 'Mery'})
+                                    () => navigation.navigate('Home')
                                 }
                                 underlayColor=''>
                                 <Text style={
@@ -147,7 +147,7 @@ const LoginScreen = ({navigation}) => {
                                 }
                                 underlayColor=''
                                 onPress={
-                                    () => navigation.navigate('Home', {name: 'Mery'})
+                                    () => navigation.navigate('Home')
                             }>
                                 <Text style={
                                     {

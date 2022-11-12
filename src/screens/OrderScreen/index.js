@@ -19,22 +19,14 @@ import {
     Pressable 
 } from 'react-native';
 
-import { getMenuData } from './menuData';
+import { getMenuData } from '../../data/menuData';
+
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import OrderScreenStyles from './style';
 
-const menuDataItem = (details) => {
-    return (<View key={details['id']} style={{display: 'flex',flexDirection: 'row',marginBottom: 10}}>
-    <Image style={{width: 80, height: 80, borderRadius: 100, marginRight: 20}} source={{uri: details['imageLocation']}} />
-    <View style={{flex: 1}}>
-    <Text style={{color: '#2E2D38', fontSize: 20, fontWeight: 'bold'}}>{details.name["tr_TR"]}</Text>
-    <Text style={{color: '#2E2D38'}}>20 TL</Text>
-    <View style={{display: 'flex', alignSelf: 'flex-end'}}><Pressable style={OrderScreenStyles.itemAddCartBtn} title='Ekle'><Text style={{color: '#FFF'}}>Ekle</Text></Pressable></View>
-    </View>
-</View>)
-}
+import MenuItem from '../../components/MenuItem';
 
 const OrderScreen = ({navigation}) => {
     const [scrollMenuSelect, setScrollMenuSelect] = useState('all');
@@ -71,14 +63,14 @@ const OrderScreen = ({navigation}) => {
                         marginTop: 10
                     }
                 }>
-                    <Text style={{paddingLeft: 10, paddingBottom: 20, fontSize: 16, fontWeight: 'bold', color: '#000'}}>Menu</Text>
+                    <Text style={OrderScreenStyles.menuTitle}>Menu</Text>
                     <ScrollView horizontal={true}>
 
                         <Pressable style={OrderScreenStyles.menuCategoryBtn} title="all"
                             onPress={
                                 () => setScrollMenuSelect('all')
                         }><Text>Hepsi</Text></Pressable >
-                        { dataState && dataState['categories'].map((e, index) => (
+                        { dataState && dataState['categories']?.map((e, index) => (
                            
                             <Pressable key={index} style={OrderScreenStyles.menuCategoryBtn} title={e.name['tr_TR']}
                             onPress={
@@ -97,15 +89,16 @@ const OrderScreen = ({navigation}) => {
                    
                      <ScrollView style={{padding: 10}}>
                         { dataState && scrollMenuSelect === "all" ?
-                             dataState['products'].map(e => (
+                             dataState['products']?.map(e => (
+                             
                                         
-                                    menuDataItem(e)
+                                <MenuItem navigation={navigation} details={e} />
                                 
                             ))
                         : 
-                        dataState['products'].filter(e => e.categories.includes(scrollMenuSelect)).map(e => (
+                        dataState['products']?.filter(e => e.categories.includes(scrollMenuSelect)).map(e => (
                                
-                                    menuDataItem(e)
+                                <MenuItem navigation={navigation} details={e}/>
                               
                             ))
                         }
