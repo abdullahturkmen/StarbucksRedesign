@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Pressable} from 'react-native';
 
 const getIcon = (icon, focused) => {
 
@@ -27,9 +27,24 @@ const getIcon = (icon, focused) => {
 
 }
 
-const NavHead = (title, icon) => ({
+const NavHead = ({title, icon, backBtn}) => ({
     headerLeft: () => (
-        <View>
+        
+        <View style={{display: 'flex',flexDirection: 'row',alignItems: 'center'}}>
+          
+             {
+                
+                backBtn && (
+                    <Pressable title='Geri' onPress={
+                        () => console.log("geri gel")
+                }><Image source={
+                        require('../assets/icons/u_angle-right-b.png')
+                    }
+                    style={
+                        style.headerIcon
+                    }/></Pressable>
+                )
+             }
             <Text style={
                 style.headerLeft
             }>

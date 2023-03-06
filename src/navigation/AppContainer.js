@@ -18,22 +18,25 @@ const TabNavigate = () => {
         <Tab.Screen name="homess"
             component={HomeScreen}
             options={
-                NavHead('Starbucks', 'favorite')
+                <NavHead title="Starbucks 1" icon="favorite" backBtn={false}  />
             }/>
         <Tab.Screen name="Order"
             component={OrderScreen}
             options={
-                NavHead('Sipariş Oluştur', 'cup')
+             
+                <NavHead title="Starbucks 2" icon="cup" backBtn={false} />
             }/>
         <Tab.Screen name="Homec"
             component={HomeScreen}
             options={
-                NavHead('Sipariş Oluştur2', 'cc')
+           
+                <NavHead title="Starbucks 3" icon="cc" backBtn={false} />
             }/>
         <Tab.Screen name="Homes"
             component={LoginScreen}
             options={
-                NavHead('Sipariş Oluştur3', 'location')
+          
+                <NavHead title="Starbucks 4" icon="location" backBtn={false} />
             }/>
     </Tab.Navigator>);
 }
@@ -54,12 +57,14 @@ const AppNavigationContainer = () => {
             <Stack.Screen name="OrderScreen"
                 component={OrderScreen}
                 options={
-                    NavHead('Sipariş Oluştur')
+              
+                    <NavHead title="Sipariş Oluştur" icon="" backBtn={false} />
                 }/>
             <Stack.Screen name="ItemDetailsScreen"
                 component={ItemDetailsScreen}
                 options={
-                    NavHead('Ürün Detayı')
+               
+                    <NavHead title="Ürün Detayı" icon="" backBtn={true} />
                 }/>
         </Stack.Navigator>
 
